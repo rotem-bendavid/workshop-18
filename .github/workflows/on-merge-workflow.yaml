@@ -4,17 +4,25 @@
 
 name: on-merge-workflow
 
-on:
-# [to be filled]
+on: 
+  push:
+    branches: [master]
 jobs:
   test:
-    runs-on: # [to be filled]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
-        # [rest to be filled]
+        run: npm i
+      - name: Run test
+        run: npm run test
   build-deploy:
-    runs-on: # [to be filled]
+    runs-on: ubuntu-latest
     steps:
-    # [rest to be filled]
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{d907720f-25b6-4dcd-bff5-b97e29b9ec46}}
+          heroku_app_name: "workshop18-rotem" #Must be unique in Heroku
+          heroku_email: "bendarotem@gmail.com"
